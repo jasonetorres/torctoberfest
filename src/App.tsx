@@ -1,7 +1,13 @@
+import Hero from './components/Hero';
+import TaskBoard from './components/TaskBoard';
+import Footer from './components/Footer';
+
 function App() {
   return (
-    <div className="min-h-screen bg-gray-100 flex items-center justify-center">
-      <p>Start prompting (or editing) to see magic happen :)</p>
+    <div className="min-h-screen bg-gray-50">
+      <Hero />
+      <TaskBoard />
+      <Footer />
     </div>
   );
 }
