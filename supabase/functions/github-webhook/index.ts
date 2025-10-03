@@ -40,7 +40,7 @@ Deno.serve(async (req: Request) => {
     const payload: GitHubIssue = await req.json();
     console.log('Received webhook:', payload.action);
 
-    if (payload.action === 'opened' || payload.action === 'edited') {
+    if (payload.action === 'opened' || payload.action === 'edited' || payload.action === 'labeled' || payload.action === 'unlabeled') {
       const issue = payload.issue;
       const labels = issue.labels.map(l => l.name);
 
