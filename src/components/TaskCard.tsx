@@ -1,4 +1,4 @@
-import { Clock, Tag, ExternalLink } from 'lucide-react';
+import { Tag, ExternalLink } from 'lucide-react';
 import type { Task } from '../types/task';
 
 interface TaskCardProps {
@@ -21,8 +21,15 @@ const categoryColors = {
 };
 
 export default function TaskCard({ task }: TaskCardProps) {
+  const issueUrl = task.github_issue_url || `https://github.com/jasonetorres/torctoberfest/issues/new?title=${encodeURIComponent(task.title)}&body=${encodeURIComponent(task.description)}&labels=${task.labels.join(',')}`;
+
   return (
-    <div className="bg-white rounded-xl shadow-sm hover:shadow-md transition-all border border-gray-200 p-6 hover:border-blue-300">
+    <a
+      href={issueUrl}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="block bg-white rounded-xl shadow-sm hover:shadow-lg transition-all border border-gray-200 p-6 hover:border-blue-400 hover:scale-[1.02] cursor-pointer"
+    >
       <div className="flex items-start justify-between mb-3">
         <div className="flex-1">
           <h3 className="text-lg font-semibold text-gray-900 mb-2">
@@ -57,25 +64,11 @@ export default function TaskCard({ task }: TaskCardProps) {
         </div>
       )}
 
-      <div className="flex items-center justify-between pt-4 border-t border-gray-100">
-        <div className="flex items-center gap-1.5 text-sm text-gray-500">
-          <Clock className="h-4 w-4" />
-          <span>{task.estimated_time}</span>
-        </div>
-
-        {task.github_issue_url ? (
-          <a
-            href={task.github_issue_url}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-1.5 text-sm font-medium text-blue-600 hover:text-blue-700 transition-colors"
-          >
-            View Issue
-            <ExternalLink className="h-4 w-4" />
-          </a>
-        ) : (
-          <span className="text-sm text-gray-400">Coming soon</span>
-        )}
+      <div className="flex items-center justify-end pt-4 border-t border-gray-100">
+        <span className="inline-flex items-center gap-1.5 text-sm font-medium text-blue-600 hover:text-blue-700 transition-colors">
+          {task.github_issue_url ? 'View Issue' : 'Create Issue'}
+          <ExternalLink className="h-4 w-4" />
+        </span>
       </div>
 
       {task.claimed_by && (
@@ -85,6 +78,6 @@ export default function TaskCard({ task }: TaskCardProps) {
           </span>
         </div>
       )}
-    </div>
+    </a>
   );
 }
