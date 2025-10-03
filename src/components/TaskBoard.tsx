@@ -19,6 +19,25 @@ export default function TaskBoard() {
 
   useEffect(() => {
     fetchTasks();
+
+    const channel = supabase
+      .channel('tasks-changes')
+      .on(
+        'postgres_changes',
+        {
+          event: '*',
+          schema: 'public',
+          table: 'tasks',
+        },
+        () => {
+          fetchTasks();
+        }
+      )
+      .subscribe();
+
+    return () => {
+      supabase.removeChannel(channel);
+    };
   }, [selectedDifficulty]);
 
   async function fetchTasks() {
