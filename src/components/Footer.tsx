@@ -39,7 +39,7 @@ export default function Footer() {
               </li>
               <li>
                 <a
-                  href="https://github.com/jasonetorres/torctoberfest/discussions/discussions"
+                  href="https://github.com/jasonetorres/torctoberfest/discussions"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="hover:text-blue-400 transition-colors inline-flex items-center gap-2"
