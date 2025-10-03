@@ -18,7 +18,7 @@ This repository is officially participating in Hacktoberfest! We welcome contrib
 4. **Get your PRs accepted** by maintainers to count toward your total
 5. **Unlock digital badges** as you progress through your contributions
 
-Join the [Hacktoberfest Discord server](https://discord.gg/hacktoberfest) to connect with other participants!
+Join the [Hacktoberfest Torc Discord channel](https://discord.gg/sfhgzTf6) to connect with other participants!
 
 ## Getting Started
 
