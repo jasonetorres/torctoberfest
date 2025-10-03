@@ -17,7 +17,7 @@ export default function Footer() {
             <ul className="space-y-2 text-sm">
               <li>
                 <a
-                  href="https://github.com/YOUR-ORG/torc-toolbelt"
+                  href="https://github.com/jasonetorres/torctoberfest"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="hover:text-blue-400 transition-colors inline-flex items-center gap-2"
@@ -28,7 +28,7 @@ export default function Footer() {
               </li>
               <li>
                 <a
-                  href="https://github.com/YOUR-ORG/torc-toolbelt/blob/main/CONTRIBUTING.md"
+                  href="https://github.com/jasonetorres/torctoberfest/blob/main/CONTRIBUTING.md"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="hover:text-blue-400 transition-colors inline-flex items-center gap-2"
@@ -39,7 +39,7 @@ export default function Footer() {
               </li>
               <li>
                 <a
-                  href="https://github.com/YOUR-ORG/torc-toolbelt/discussions"
+                  href="https://github.com/jasonetorres/torctoberfest/discussions"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="hover:text-blue-400 transition-colors inline-flex items-center gap-2"
@@ -66,7 +66,7 @@ export default function Footer() {
               </li>
               <li>
                 <a
-                  href="https://github.com/YOUR-ORG/torc-toolbelt/blob/main/HACKTOBERFEST.md"
+                  href="https://github.com/jasonetorres/torctoberfest/blob/main/HACKTOBERFEST.md"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="hover:text-blue-400 transition-colors"
@@ -92,7 +92,7 @@ export default function Footer() {
           <p className="text-center text-sm text-gray-400">
             &copy; {new Date().getFullYear()} TORC Community. Licensed under{' '}
             <a
-              href="https://github.com/YOUR-ORG/torc-toolbelt/blob/main/LICENSE"
+              href="https://github.com/jasonetorres/torctoberfest/blob/main/LICENSE"
               target="_blank"
               rel="noopener noreferrer"
               className="hover:text-blue-400 transition-colors"

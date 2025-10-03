@@ -31,7 +31,7 @@ export default function Hero() {
               Browse Tasks
             </a>
             <a
-              href="https://github.com/YOUR-ORG/torc-toolbelt"
+              href="https://github.com/jasonetorres/torctoberfest"
               target="_blank"
               rel="noopener noreferrer"
               className="text-base font-semibold leading-7 text-white hover:text-blue-400 transition-colors"

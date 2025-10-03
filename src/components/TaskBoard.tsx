@@ -36,10 +36,16 @@ export default function TaskBoard() {
 
       const { data, error } = await query;
 
-      if (error) throw error;
+      if (error) {
+        console.error('Supabase error:', error);
+        throw error;
+      }
+
+      console.log('Fetched tasks:', data?.length || 0);
       setTasks(data || []);
     } catch (error) {
       console.error('Error fetching tasks:', error);
+      setTasks([]);
     } finally {
       setLoading(false);
     }
@@ -100,7 +106,7 @@ export default function TaskBoard() {
             Want to add your own task or suggestion?
           </p>
           <a
-            href="https://github.com/YOUR-ORG/torc-toolbelt/issues/new"
+            href="https://github.com/jasonetorres/torctoberfest/issues/new"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-white text-gray-900 border-2 border-gray-300 hover:border-blue-600 hover:text-blue-600 font-medium transition-all"
