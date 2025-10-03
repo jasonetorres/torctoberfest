@@ -12,16 +12,16 @@
     "open-source",
     "toolbelt"
   ],
-  "author": "TORC Community",
+  "author": "torc community",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/YOUR-ORG/torc-toolbelt.git"
+    "url": "https://github.com/jasonetorres/torctoberfest.git"
   },
   "bugs": {
-    "url": "https://github.com/YOUR-ORG/torc-toolbelt/issues"
+    "url": "https://github.com/jasonetorres/torctoberfest/issues"
   },
-  "homepage": "https://github.com/YOUR-ORG/torc-toolbelt#readme",
+  "homepage": "https://github.com/jasonetorres/torctoberfest#readme",
   "scripts": {
     "dev": "vite",
     "build": "vite build",

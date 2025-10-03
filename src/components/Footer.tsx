@@ -6,7 +6,7 @@ export default function Footer() {
       <div className="mx-auto max-w-7xl px-6 py-12 lg:px-8">
         <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
           <div>
-            <h3 className="text-lg font-semibold text-white mb-4">TORC Toolbelt</h3>
+            <h3 className="text-lg font-semibold text-white mb-4">torc toolbelt</h3>
             <p className="text-sm text-gray-400">
               A community-driven collection of utilities built by developers, for developers.
             </p>
@@ -39,7 +39,7 @@ export default function Footer() {
               </li>
               <li>
                 <a
-                  href="https://github.com/jasonetorres/torctoberfest/discussions"
+                  href="https://github.com/jasonetorres/torctoberfest/discussions/discussions"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="hover:text-blue-400 transition-colors inline-flex items-center gap-2"
@@ -76,7 +76,7 @@ export default function Footer() {
               </li>
               <li>
                 <a
-                  href="https://discord.gg/hacktoberfest"
+                  href="https://torc.dev/discord"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="hover:text-blue-400 transition-colors"
@@ -90,7 +90,7 @@ export default function Footer() {
 
         <div className="mt-8 border-t border-gray-800 pt-8">
           <p className="text-center text-sm text-gray-400">
-            &copy; {new Date().getFullYear()} TORC Community. Licensed under{' '}
+            &copy; {new Date().getFullYear()} torc community. Licensed under{' '}
             <a
               href="https://github.com/jasonetorres/torctoberfest/blob/main/LICENSE"
               target="_blank"
