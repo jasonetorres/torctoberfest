@@ -1,3 +1,10 @@
+> [!NOTE]
+> Not all sections need to be filled out.  
+> Feel free to **remove any optional or non-applicable headings** (for example: screenshots, dependencies, or deployment notes).  
+> Keep your pull request **clear, concise, and focused** on the changes you made.
+
+---
+
 ## 📝 Pull Request Description
 
 <!-- Provide a clear and concise description of your changes -->
