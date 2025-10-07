@@ -1,4 +1,4 @@
-import { describe, expect, test } from 'vitest';
+import { describe, expect, test } from "vitest";
 import { isURLValid } from "../../utilities/validators/url.js";
 
 describe("isURLValid", () => {
@@ -153,6 +153,54 @@ describe("isURLValid", () => {
   describe("Parameterized Tests", () => {
     test("should return false for malformed URL", () => {
       expect(isURLValid("not-a-url")).toBe(false);
+    });
+  });
+
+  describe("URL Fragments/Anchors", () => {
+    test("should return true for URL with hash fragment", () => {
+      expect(isURLValid("https://example.com#section")).toBe(true);
+    });
+
+    test("should return true for URL with hash and path", () => {
+      expect(isURLValid("https://example.com/page#anchor")).toBe(true);
+    });
+
+    test("should return true for URL with hash and query params", () => {
+      expect(isURLValid("https://example.com?param=value#section")).toBe(true);
+    });
+
+    test("should return true for URL with complex hash", () => {
+      expect(isURLValid("https://example.com#section-with-dashes")).toBe(true);
+    });
+
+    test("should return true for URL with encoded hash", () => {
+      expect(isURLValid("https://example.com#section%20with%20spaces")).toBe(
+        true
+      );
+    });
+
+    test("should return true for URL with just hash", () => {
+      expect(isURLValid("https://example.com#")).toBe(true);
+    });
+
+    test("should return false for truly malformed URLs", () => {
+      expect(isURLValid("https://exam ple.com")).toBe(false);
+      expect(isURLValid("https://example..com")).toBe(false);
+      expect(isURLValid("https://.example.com")).toBe(false);
+    });
+  });
+
+  describe("Protocol-relative URLs", () => {
+    test("should return false for protocol-relative URL", () => {
+      expect(isURLValid("//www.example.com")).toBe(false);
+    });
+
+    test("should return false for protocol-relative URL with path", () => {
+      expect(isURLValid("//example.com/path")).toBe(false);
+    });
+
+    test("should return false for protocol-relative URL with query", () => {
+      expect(isURLValid("//example.com?param=value")).toBe(false);
     });
   });
 });
