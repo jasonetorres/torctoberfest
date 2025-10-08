@@ -1,4 +1,5 @@
 # torcReads: The Torc Community Book Club
+<img width="1000" height="600" alt="torcReads" src="https://github.com/user-attachments/assets/60934c6a-1575-4a15-9d59-4a19c3125141" />
 
 ## Description
 A virtual platform for torc community to log books we've read, access study guides, and vote monthly on the next read suggested by members.
