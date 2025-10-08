@@ -28,7 +28,8 @@
     "lint": "eslint .",
     "preview": "vite preview",
     "typecheck": "tsc --noEmit -p tsconfig.app.json",
-    "test": "echo \"Tests will run here. Add Jest or Vitest for testing.\" && exit 0"
+    "test": "echo \"Tests will run here. Add Jest or Vitest for testing.\" && exit 0",
+    "vitest": "npx vitest run"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.57.4",
