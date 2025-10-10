@@ -21,6 +21,7 @@ This list is maintained by contributors like you. When you submit your first PR,
 ### Contributors
 
 <!-- Add your name below this line -->
+[Amelia D.](https://github.com/amelia2802) - don't tell Rita Skeeter I'm hiding out in the Muggle world!
 
 ---
 
