@@ -23,6 +23,8 @@ This list is maintained by contributors like you. When you submit your first PR,
 <!-- Add your name below this line -->
 [Amelia D.](https://github.com/amelia2802) - don't tell Rita Skeeter I'm hiding out in the Muggle world!
 
+[Sutthinart Khunvadhana](https://github.com/iakgoog) - an ordinary developer with 2 children
+
 ---
 
 Want to see your name here? Check out our [Contributing Guidelines](CONTRIBUTING.md) and make your first contribution!
