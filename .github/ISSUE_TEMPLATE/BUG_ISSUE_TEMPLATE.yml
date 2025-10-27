@@ -1,0 +1,40 @@
+name: "Bug report"
+description: "Use this template to report a bug."
+title: "[BUG] "
+labels:
+  - bug
+assignees: []
+body:
+  - type: markdown
+    attributes:
+      value: "## 📝 Description\n\nPlease fill out the fields below."
+  - type: textarea
+    id: description
+    attributes:
+      label: "Description"
+      description: "Provide a brief description of the bug."
+      placeholder: "What happened?"
+    validations:
+      required: true
+  - type: textarea
+    id: current_behaviour
+    attributes:
+      label: "Current Behaviour"
+      description: "Describe the current behavior that is considered a bug."
+      placeholder: "Steps to reproduce or observed behavior"
+    validations:
+      required: true
+  - type: textarea
+    id: expected_behaviour
+    attributes:
+      label: "Expected Behaviour"
+      description: "Describe the expected behavior."
+      placeholder: "What should happen instead?"
+    validations:
+      required: true
+  - type: textarea
+    id: additional_context
+    attributes:
+      label: "Additional context (optional)"
+      description: "Attach mockups, links, examples, or other context that helps."
+      placeholder: "Logs, screenshots, OS, versions, etc."
