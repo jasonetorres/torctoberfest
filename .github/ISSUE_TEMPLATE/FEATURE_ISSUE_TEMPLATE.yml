@@ -1,0 +1,84 @@
+name: "Feature Request"
+description: "Suggest a new feature or enhancement"
+title: "[FEATURE] "
+labels:
+  - enhancement
+body:
+  - type: markdown
+    attributes:
+      value: "## 📝 Description"
+  - type: textarea
+    id: description
+    attributes:
+      label: "Description"
+      description: "Provide a brief description of the requested feature."
+    validations:
+      required: true
+
+  - type: markdown
+    attributes:
+      value: "## 🎯 Motivation"
+  - type: textarea
+    id: motivation
+    attributes:
+      label: "Motivation"
+      description: "Describe the problem or opportunity it addresses and who benefits."
+    validations:
+      required: true
+
+  - type: markdown
+    attributes:
+      value: "## ✅ Acceptance Criteria"
+  - type: checkboxes
+    id: acceptance_criteria
+    attributes:
+      label: "Acceptance Criteria"
+      options:
+        - label: "Criteria 1"
+        - label: "Criteria 2"
+        - label: "Criteria 3"
+
+  - type: markdown
+    attributes:
+      value: "## ⚙️ Technical Details"
+  - type: textarea
+    id: implementation
+    attributes:
+      label: "Proposed Implementation Approach"
+      description: "e.g., API endpoint, UI component, database schema changes"
+
+  - type: textarea
+    id: data_considerations
+    attributes:
+      label: "Data Considerations"
+      description: "Models, validation, storage needs"
+
+  - type: textarea
+    id: security
+    attributes:
+      label: "Security/Permissions"
+      description: "Any auth or role checks?"
+
+  - type: markdown
+    attributes:
+      value: "## 🔗 Dependencies"
+  - type: textarea
+    id: related_tickets
+    attributes:
+      label: "Related Tickets or Features"
+
+  - type: textarea
+    id: external_services
+    attributes:
+      label: "External Services or APIs"
+
+  - type: textarea
+    id: libraries
+    attributes:
+      label: "Libraries or Frameworks Required"
+
+  - type: textarea
+    id: additional_context
+    attributes:
+      label: "Additional Context (Optional)"
+      description: "Attach mockups, links, examples, or other context that helps with evaluation."
