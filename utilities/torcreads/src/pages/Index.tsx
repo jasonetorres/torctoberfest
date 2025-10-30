@@ -1,20 +1,55 @@
+import { useState, useEffect } from "react";
 import { Navigation } from "@/components/Navigation";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { BookOpen, Library, Vote, TrendingUp } from "lucide-react";
+import { BookOpen, Library, Vote } from "lucide-react";
 import { Link } from "react-router-dom";
 import { getBooks, getStudyGuides, getVotingOptions } from "@/lib/storage";
 
 const Index = () => {
-  const books = getBooks();
-  const guides = getStudyGuides();
-  const votes = getVotingOptions();
+  const [books, setBooks] = useState<any[]>([]);
+  const [guides, setGuides] = useState<any[]>([]);
+  const [votes, setVotes] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    loadData();
+  }, []);
+
+  const loadData = async () => {
+    setLoading(true);
+    try {
+      const booksData = await getBooks();
+      const guidesData = getStudyGuides(); // Still localStorage (sync)
+      const votesData = await getVotingOptions();
+      
+      setBooks(booksData);
+      setGuides(guidesData);
+      setVotes(votesData);
+    } catch (error) {
+      console.error('Error loading data:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const stats = [
     { label: "Books Read", value: books.length, icon: BookOpen, link: "/books" },
     { label: "Study Guides", value: guides.length, icon: Library, link: "/guides" },
     { label: "Active Votes", value: votes.length, icon: Vote, link: "/vote" },
   ];
+
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-background">
+        <Navigation />
+        <div className="container mx-auto px-4 py-16 text-center">
+          <BookOpen className="w-16 h-16 mx-auto text-primary mb-4 animate-pulse" />
+          <p className="text-muted-foreground">Loading...</p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-background">

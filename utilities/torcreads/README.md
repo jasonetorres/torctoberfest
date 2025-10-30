@@ -19,6 +19,8 @@ npm i
 
 # Step 2: Start the development server with auto-reloading and an instant preview.
 npm run dev
+
+# Step 3: go throurg the .env.example file and create your own .env file with the necessary Supabase credentials.
 ```
 
 ## What technologies are used for this project?
@@ -30,5 +32,6 @@ This project is built with:
 - React
 - shadcn-ui
 - Tailwind CSS
+- Supabase
 
 **This project is initially generated with Loveable, may change over time.**

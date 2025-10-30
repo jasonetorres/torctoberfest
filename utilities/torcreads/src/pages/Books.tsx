@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Navigation } from "@/components/Navigation";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
@@ -11,8 +11,9 @@ import { getBooks, saveBook, deleteBook, getCurrentUser, type Book } from "@/lib
 import { useToast } from "@/hooks/use-toast";
 
 const Books = () => {
-  const [books, setBooks] = useState<Book[]>(getBooks());
+  const [books, setBooks] = useState<Book[]>([]);
   const [open, setOpen] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [formData, setFormData] = useState({
     title: "",
     author: "",
@@ -23,26 +24,80 @@ const Books = () => {
   });
   const { toast } = useToast();
 
-  const handleSubmit = (e: React.FormEvent) => {
+  useEffect(() => {
+    loadBooks();
+  }, []);
+
+  const loadBooks = async () => {
+    setLoading(true);
+    try {
+      const data = await getBooks();
+      setBooks(data);
+    } catch (error) {
+      console.error('Error loading books:', error);
+      toast({ 
+        title: "Error loading books", 
+        description: "Please try refreshing the page",
+        variant: "destructive" 
+      });
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const newBook: Book = {
-      id: Date.now().toString(),
-      ...formData,
-      addedBy: getCurrentUser(),
-    };
-    saveBook(newBook);
-    setBooks(getBooks());
-    setOpen(false);
-    setFormData({ title: "", author: "", coverUrl: "", dateRead: "", rating: 0, notes: "" });
-    toast({ title: "Book added successfully!" });
+    
+    try {
+      const newBook: Book = {
+        ...formData,
+        addedBy: getCurrentUser(),
+      };
+      
+      await saveBook(newBook);
+      await loadBooks();
+      
+      setOpen(false);
+      setFormData({ title: "", author: "", coverUrl: "", dateRead: "", rating: 0, notes: "" });
+      toast({ title: "Book added successfully!" });
+    } catch (error) {
+      console.error('Error saving book:', error);
+      toast({ 
+        title: "Error adding book", 
+        description: "Please try again",
+        variant: "destructive" 
+      });
+    }
   };
 
-  const handleDelete = (id: string) => {
-    deleteBook(id);
-    setBooks(getBooks());
-    toast({ title: "Book removed" });
+  const handleDelete = async (id: string) => {
+    try {
+      await deleteBook(id);
+      await loadBooks();
+      toast({ title: "Book removed" });
+    } catch (error) {
+      console.error('Error deleting book:', error);
+      toast({ 
+        title: "Error deleting book",
+        description: "Please try again",
+        variant: "destructive"
+      });
+    }
   };
 
+  if(loading){
+    return (
+      <div className="min-h-screen bg-background">
+        <Navigation />
+        <main className="container mx-auto px-4 py-8">
+          <div className="text-center py-12">
+            <BookOpen className="w-16 h-16 mx-auto text-muted mb-4 animate-pulse" />
+            <p className="text-muted-foreground">Loading books...</p>
+          </div>
+        </main>
+      </div>
+    );
+  }
   return (
     <div className="min-h-screen bg-background">
       <Navigation />
