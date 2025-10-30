@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Navigation } from "@/components/Navigation";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -10,7 +10,8 @@ import { getVotingOptions, saveVotingOption, voteForOption, clearVotingOptions, 
 import { useToast } from "@/hooks/use-toast";
 
 const Vote = () => {
-  const [options, setOptions] = useState<VotingOption[]>(getVotingOptions());
+  const [options, setOptions] = useState<VotingOption[]>([]);
+  const [loading, setLoading] = useState(true);
   const [open, setOpen] = useState(false);
   const [formData, setFormData] = useState({
     bookTitle: "",
@@ -18,32 +19,100 @@ const Vote = () => {
   });
   const { toast } = useToast();
 
-  const handleSubmit = (e: React.FormEvent) => {
+  useEffect(() => {
+    loadOptions();
+  }, []);
+
+  const loadOptions = async () => {
+    setLoading(true);
+    try {
+      const data = await getVotingOptions();
+      setOptions(data);
+    } catch (error) {
+      console.error('Error loading voting options:', error);
+      toast({
+        title: "Error loading options",
+        description: "Please try refreshing the page",
+        variant: "destructive"
+      });
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const newOption: VotingOption = {
-      id: Date.now().toString(),
-      ...formData,
-      suggestedBy: getCurrentUser(),
-      votes: 0,
-    };
-    saveVotingOption(newOption);
-    setOptions(getVotingOptions());
-    setOpen(false);
-    setFormData({ bookTitle: "", author: "" });
-    toast({ title: "Book suggestion added!" });
+    
+    try {
+      const newOption: VotingOption = {
+        ...formData,
+        suggestedBy: getCurrentUser(),
+        votes: 0,
+      };
+      
+      await saveVotingOption(newOption);
+      await loadOptions();
+      
+      setOpen(false);
+      setFormData({ bookTitle: "", author: "" });
+      toast({ title: "Book suggestion added!" });
+    } catch (error) {
+      console.error('Error saving suggestion:', error);
+      toast({
+        title: "Error adding suggestion",
+        description: "Please try again",
+        variant: "destructive"
+      });
+    }
   };
 
-  const handleVote = (id: string) => {
-    voteForOption(id);
-    setOptions(getVotingOptions());
-    toast({ title: "Vote recorded!" });
+  const handleVote = async (id: string) => {
+    try {
+      await voteForOption(id);
+      await loadOptions();
+      toast({ title: "Vote recorded!" });
+    } catch (error) {
+      console.error('Error voting:', error);
+      toast({
+        title: "Error recording vote",
+        description: "Please try again",
+        variant: "destructive"
+      });
+    }
   };
 
-  const handleClearVotes = () => {
-    clearVotingOptions();
-    setOptions([]);
-    toast({ title: "Voting reset for new month" });
+  const handleClearVotes = async () => {
+    if (!window.confirm('Are you sure you want to reset all votes? This cannot be undone.')) {
+      return;
+    }
+
+    try {
+      await clearVotingOptions();
+      await loadOptions();
+      toast({ title: "Voting reset for new month" });
+    } catch (error) {
+      console.error('Error clearing votes:', error);
+      toast({
+        title: "Error resetting votes",
+        description: "Please try again",
+        variant: "destructive"
+      });
+    }
   };
+
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-background">
+        <Navigation />
+        <main className="container mx-auto px-4 py-8">
+          <div className="text-center py-12">
+            <Trophy className="w-16 h-16 mx-auto text-muted mb-4 animate-pulse" />
+            <p className="text-muted-foreground">Loading voting options...</p>
+          </div>
+        </main>
+      </div>
+    );
+  }
 
   const sortedOptions = [...options].sort((a, b) => b.votes - a.votes);
   const winner = sortedOptions[0];
@@ -138,7 +207,7 @@ const Vote = () => {
                       {option.votes === 1 ? 'vote' : 'votes'}
                     </p>
                   </div>
-                  <Button onClick={() => handleVote(option.id)} className="gap-2">
+                  <Button onClick={() => handleVote(option.id!)} className="gap-2">
                     <ThumbsUp className="w-4 h-4" />
                     Vote
                   </Button>
